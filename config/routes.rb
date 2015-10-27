@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :events
   resources :registered_applications
-  get 'home/index'
 
   devise_for :users
 
