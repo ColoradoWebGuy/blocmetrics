@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
 
-  resources :events
+  devise_for :users
+
+  match '/events', to: 'events#preflight', via: [:options]
+
   resources :registered_applications
 
-  devise_for :users
+  namespace :api, defaults: { format: :json } do
+     resources :events, only: [:create]
+  end
 
   root to: "home#index"
 
