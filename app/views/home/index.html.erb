@@ -1,1 +1,36 @@
-<h1>Welcome to Blocmetrics!</h1>
+
+<% if !user_signed_in? %>
+<div class="row">
+  <div class="col-md-4 text-center">
+    <h2 class="top-buffer pull-right">
+    <%= fa_icon "pie-chart 5x" %>
+  </h2>
+  </div>
+  <div class="col-md-8">
+    <h1 class="top-buffer">
+       Welcome to Blocmetrics! <br />
+       <small>An analytics service to track events on websites. It's free!</small>
+    </h1>
+    <%= link_to new_user_registration_path, class: "btn btn-lg btn-primary" do %>
+        <%= fa_icon "thumbs-o-up", text: "Sign up today!", right: true %>
+    <% end %>
+  </div>
+</div>
+<% else %>
+<div class="row">
+  <div class="col-md-4 text-center">
+    <h2 class="top-buffer pull-right">
+    <%= fa_icon "pie-chart 4x" %>
+  </h2>
+  </div>
+  <div class="col-md-8">
+    <h1 class="top-buffer">
+       Welcome <%= current_user.username %>! <br />
+    </h1>
+    <%= link_to registered_applications_path, class: "btn btn-info btn-lg" do %>
+        <% #fa_icon "thumbs-o-up", text: "See your web apps!", right: true %>
+        Let's see some analytics!
+    <% end %>
+  </div>
+</div>
+<% end %>

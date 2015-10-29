@@ -17,6 +17,7 @@ class API::EventsController < ApplicationController
      @registered_application = RegisteredApplication.find_by(url: request.env['HTTP_ORIGIN'])
      # check if nil
      if @registered_application.nil?
+       puts "ran nil"
        render json: "Unregistered application", status: :unprocessable_entity
      else
        # create event

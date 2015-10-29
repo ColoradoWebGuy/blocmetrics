@@ -1,25 +1,43 @@
 <%= form_for(@registered_application) do |f| %>
-  <% if @registered_application.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@registered_application.errors.count, "error") %> prohibited this registered_application from being saved:</h2>
+  <div class="well bs-component">
 
-      <ul>
-      <% @registered_application.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <% if @registered_application.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@registered_application.errors.count, "error") %> prohibited this registered_application from being saved:</h2>
+
+        <ul>
+        <% @registered_application.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="row top-buffer">
+    <%= form_group_tag(@registered_application.errors[:name]) do %>
+      <%= f.label :name, class: "col-lg-2 control-label" %>
+      <div class="col-lg-10">
+        <%= f.text_field :name, autocomplete: "off", class: "form-control", placeholder: "Name of the Application" %>
+      </div>
+    <% end %>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <div class="row top-buffer">
+    <%= form_group_tag(@registered_application.errors[:url]) do %>
+      <%= f.label :url, class: "col-lg-2 control-label" %>
+      <div class="col-lg-10">
+        <%= f.text_field :url, autocomplete: "off", class: "form-control", placeholder: "https://example.com" %>
+      </div>
+    <% end %>
+    </div>
+
+    <div class="row top-buffer">
+    <div class="form-group">
+      <div class="col-lg-5 col-lg-offset-7">
+        <%= f.submit (@registered_application.persisted? ? status = "Update Application" : status = "Add New Application"), class: "btn btn-success btn-block" %>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :url %><br>
-    <%= f.text_field :url %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+
   </div>
 <% end %>

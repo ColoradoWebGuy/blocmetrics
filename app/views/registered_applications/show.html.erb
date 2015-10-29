@@ -1,18 +1,52 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @registered_application.name %>
-</p>
+<div class="col-lg-4">
+  <h2 class="top-buffer">Website Stats</h2>
+  <div class="well bs-component">
+    <p>
+      <strong>Name:</strong>
+      <%= @registered_application.name %>
+    </p>
 
-<p>
-  <strong>Url:</strong>
-  <%= @registered_application.url %>
-</p>
+    <p>
+      <strong>Url:</strong>
+      <%= @registered_application.url %>
+    </p>
 
-<p>
-  <strong>Events Count: <%= @events.length %></strong>
-</p>
+    <p>
+    <strong>Events Count: <%= @events.length %></strong>
+    </p>
 
-<%= link_to 'Edit', edit_registered_application_path(@registered_application) %> |
-<%= link_to 'Back', registered_applications_path %>
+  </div>
+
+  <h2 class="top-buffer">Events History</h2>
+  <div class="well bs-component">
+      <% @events.sort.each_with_index { |event, i| %>
+        <p>
+          <strong>
+            (<%= i %>) Name: <%= event[0] %>
+          </strong><br />
+          Details: <%= event %><br />
+        </p>
+      <% } %>
+  </div>
+</div>
+
+
+<div class="col-lg-8">
+  <h2 class="top-buffer">Analytics</h2>
+  <div class="well clearfix">
+
+    <p>
+      <h4>All events</h4>
+      <%= pie_chart @registered_application.events.group(:name).count %>
+    </p>
+    <hr />
+    <p>
+      <h4>All events over time</h4>
+      <%= line_chart @registered_application.events.group_by_day(:created_at).count %>
+    </p>
+  </div>
+
+  <%= link_to 'Edit', edit_registered_application_path(@registered_application), class: "btn btn-default" %>
+  <%= link_to 'Back', registered_applications_path, class: "btn btn-default" %>
+</div>

@@ -12,13 +12,10 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
- .login {
-  float: left !important;
-  margin: 15px;
-}
-
-.top-buffer { margin-top:20px; }
+ // any other custom css
+ @import "base";

@@ -7,9 +7,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
   <div class="container">
-
-    <br />
 
     <div class="flash">
       <% if notice %>
@@ -34,18 +33,30 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
           <ul class="nav navbar-nav">
-            <li class="active">
-              <%= link_to "Registered Apps", registered_applications_path, class: "" %>
-            </li>
+            <% if user_signed_in? %>
+
+              <%= nav_link 'Web Apps', registered_applications_path %>
+
+            <% end %>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
               <li>
                 <div class="login">
-                  Signed in as: <strong><%= current_user.email %></strong> |
-                  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> - <%= link_to "Sign Out", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-                </div>
+
+                  <span style="margin-right: 10px">
+                    <%= link_to current_user.username, edit_user_registration_path %>
+                  </span>
+                  <%= link_to edit_user_registration_path, class: "btn btn-sm btn-default navbar-link", data: { toggle: 'tooltip', placement: 'bottom', original_title: 'Profile' } do %>
+                      <%= fa_icon "user" %>
+                  <% end %>
+
+                  <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-sm btn-default navbar-link", data: { toggle: 'tooltip', placement: 'bottom', original_title: 'Sign Out' } do %>
+                      <%= fa_icon "sign-out" %>
+                  <% end %>
+
+               </div>
               </li>
             <% else %>
               <li><div class="login"><%= link_to "Sign up", new_user_registration_path %> | <%= link_to "Sign in", new_user_session_path %></div></li>

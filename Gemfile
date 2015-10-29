@@ -4,7 +4,6 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.4'
 
 group :production do
-   gem 'pg'
    gem 'rails_12factor'
 end
 
@@ -37,3 +36,13 @@ end
  # Used for encrypting User passwords
  gem 'bcrypt'
  gem 'figaro', '1.0'
+ # charts
+ gem "chartkick"
+ # group_by_day for charts
+ gem "groupdate"
+ # using SQlite for charts as well
+ gem 'pg'
+ # install font-awesome
+ gem "font-awesome-rails"
+ # fixes javascript load
+ gem 'jquery-turbolinks'
